@@ -13,14 +13,15 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ alt, src, title, price }) => {
   return (
     <div className="flex flex-col items-start bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
-      <Image
-        alt={alt}
-        className="object-contain object-center"
-        height={150}
-        src={src}
-        layout="responsive"
-        width={300}
-      />
+      <div className="w-full h-64 relative">
+        <Image
+          alt={alt}
+          className="object-contain object-center"
+          layout="fill"
+          objectFit="cover"
+          src={src}
+        />
+      </div>
       <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white">
         {title}
       </h3>
