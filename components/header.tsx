@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
         <Image
           alt="Company Logo"
           className="object-contain object-center rounded-full"
-          height={80}
+          height={80} 
           src="/klutch-logo.png"
           layout="fixed"
           width={80}

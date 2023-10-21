@@ -33,10 +33,26 @@ export const products: Product[] = [
   },
   {
     id: "4",
-    name: '48" Round Plastic Folding Table - Granite White',
+    name: 'Round Plastic Folding Table - Granite White',
     description:
       "This round folding table is 4 feet long and is beneficial in a multitude of settings that include banquet halls, conference centers, cafeterias, schools and in the home. The table can be used as a temporary seating solution or be setup for everyday use. The durable blow molded top is low maintenance and cleans easily. The table legs fold under the table to make storage more convenient and for better portability.",
     price: 4.99,
-    image: "/placeholder.png",
+    image: "/round-folding-table.png",
+  },
+  {
+    id: "5",
+    name: 'Rectangle Plastic Folding Table - Granite White',
+    description:
+      "This round folding table is 4 feet long and is beneficial in a multitude of settings that include banquet halls, conference centers, cafeterias, schools and in the home. The table can be used as a temporary seating solution or be setup for everyday use. The durable blow molded top is low maintenance and cleans easily. The table legs fold under the table to make storage more convenient and for better portability.",
+    price: 4.99,
+    image: "/rectangle-folding-table.png",
+  },
+  {
+    id: "6",
+    name: 'Queen Chair - White with Gold Trim',
+    description:
+      "This round folding table is 4 feet long and is beneficial in a multitude of settings that include banquet halls, conference centers, cafeterias, schools and in the home. The table can be used as a temporary seating solution or be setup for everyday use. The durable blow molded top is low maintenance and cleans easily. The table legs fold under the table to make storage more convenient and for better portability.",
+    price: 200,
+    image: "/king-chair.png",
   },
 ];

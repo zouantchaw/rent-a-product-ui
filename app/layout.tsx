@@ -4,11 +4,12 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] });
+const image = "/klutch-logo.png";
 
 export const metadata: Metadata = {
   title: "Klutch Rentals",
   description: "DMV's premier party and event rental company",
-  icons: ["klutch-logo.png"],
+  icons: [image],
 };
 
 export default function RootLayout({
