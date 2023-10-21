@@ -7,7 +7,7 @@ export const Banner: React.FC = () => {
         alt="Image Banner"
         className="object-cover object-center"
         height={800}
-        src="/placeholder.png"
+        src="/banner-3.png"
         layout="responsive"
         width={1920}
       />
