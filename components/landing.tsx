@@ -20,6 +20,7 @@ import {
   SheetHeader,
   SheetFooter,
 } from "@/components/ui/sheet";
+import Image from "next/image";
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
@@ -49,16 +50,13 @@ export function Landing() {
     <section className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black relative">
       <div className="flex justify-between items-center w-full px-4 sm:px-8 py-2">
         <div className="flex items-center">
-          <img
+          <Image
             alt="Company Logo"
             className="object-contain object-center rounded-full"
-            height="80"
-            src="/vercel.svg"
-            style={{
-              aspectRatio: "80/80",
-              objectFit: "cover",
-            }}
-            width="80"
+            height={80}
+            src="/placeholder.png"
+            layout="fixed"
+            width={80}
           />
           <h2 className="ml-2 text-2xl font-bold text-gray-900 dark:text-white sm:ml-4 sm:text-3xl">
             rent a product ui
@@ -82,30 +80,24 @@ export function Landing() {
         </Button>
       </div>
       <div className="w-full overflow-hidden">
-        <img
+        <Image
           alt="Image Banner"
           className="object-cover object-center"
-          height="800"
-          src="/vercel.svg"
-          style={{
-            aspectRatio: "1920/800",
-            objectFit: "cover",
-          }}
-          width="1920"
+          height={800}
+          src="/placeholder.png"
+          layout="responsive"
+          width={1920}
         />
       </div>
       <div className="w-3/4 py-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div className="flex flex-col items-start bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
-          <img
+          <Image
             alt="Product 1"
             className="object-contain object-center"
-            height="150"
-            src="/next.svg"
-            style={{
-              aspectRatio: "300/150",
-              objectFit: "cover",
-            }}
-            width="300"
+            height={150}
+            src="/placeholder.png"
+            layout="responsive"
+            width={300}
           />
           <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white">
             Product 1
@@ -124,16 +116,13 @@ export function Landing() {
           </Button>
         </div>
         <div className="flex flex-col items-start bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
-          <img
+          <Image
             alt="Product 2"
             className="object-contain object-center"
-            height="150"
-            src="/next.svg"
-            style={{
-              aspectRatio: "300/150",
-              objectFit: "cover",
-            }}
-            width="300"
+            height={150}
+            src="/placeholder.png"
+            layout="responsive"
+            width={300}
           />
           <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white">
             Product 2
@@ -152,16 +141,13 @@ export function Landing() {
           </Button>
         </div>
         <div className="flex flex-col items-start bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
-          <img
+          <Image
             alt="Product 3"
             className="object-contain object-center"
-            height="150"
-            src="/next.svg"
-            style={{
-              aspectRatio: "300/150",
-              objectFit: "cover",
-            }}
-            width="300"
+            height={150}
+            src="/placeholder.png"
+            layout="responsive"
+            width={300}
           />
           <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white">
             Product 3
@@ -180,16 +166,13 @@ export function Landing() {
           </Button>
         </div>
         <div className="flex flex-col items-start bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
-          <img
+          <Image
             alt="Product 4"
             className="object-contain object-center"
-            height="150"
-            src="/next.svg"
-            style={{
-              aspectRatio: "300/150",
-              objectFit: "cover",
-            }}
-            width="300"
+            height={150}
+            src="/placeholder.png"
+            layout="responsive"
+            width={300}
           />
           <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white">
             Product 4
