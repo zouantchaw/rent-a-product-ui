@@ -45,6 +45,7 @@ export function Landing() {
             src={product.image}
             title={product.name}
             price={product.price}
+            color={product.color}
           />
         ))}
       </div>
