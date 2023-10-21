@@ -13,7 +13,7 @@ export const products: Product[] = [
     description:
       "A convenient option for both indoor and outdoor events, this folding chair features a lightweight design and a comfortable contoured seat and back.",
     price: 2.99,
-    image: "/placeholder.png",
+    image: "/folding-chair-white.png",
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ export const products: Product[] = [
     description:
       "The Chiavari chair is the most popular and most elegant ballroom chair in today's market. Chiavari chairs provide a touch of elegance. It is very great for weddings, corporate events, elegant parties, anniversaries, birthday parties and so much more!",
     price: 4.99,
-    image: "/placeholder.png",
+    image: "/chiavari-chair-gold.png",
   },
   {
     id: "3",
@@ -29,7 +29,7 @@ export const products: Product[] = [
     description:
       "The Chiavari chair is the most popular and most elegant ballroom chair in today's market. Chiavari chairs provide a touch of elegance. It is very great for weddings, corporate events, elegant parties, anniversaries, birthday parties and so much more!",
     price: 4.99,
-    image: "/placeholder.png",
+    image: "/chiavari-chair-silver.png",
   },
   {
     id: "4",

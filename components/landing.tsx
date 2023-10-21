@@ -40,6 +40,7 @@ export function Landing() {
       <div className="w-3/4 py-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
         {products.map((product, index) => (
           <ProductCard
+            key={index}
             alt="Product Image"
             src={product.image}
             title={product.name}
