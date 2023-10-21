@@ -21,6 +21,7 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet";
 import Image from "next/image";
+import { ModeToggle } from "./mode-toggle";
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
@@ -62,22 +63,9 @@ export function Landing() {
             rent a product ui
           </h2>
         </div>
-        <Button className="text-gray-900 dark:text-white" variant="ghost">
-          <svg
-            className=" text-gray-900 dark:text-white"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-          </svg>
-        </Button>
+        <div>
+          <ModeToggle />
+        </div>
       </div>
       <div className="w-full overflow-hidden">
         <Image
@@ -191,8 +179,8 @@ export function Landing() {
           </Button>
         </div>
       </div>
-      <footer className="w-full py-6 bg-black dark:bg-black text-center">
-        <p className="text-white dark:text-white">
+      <footer className="w-full py-6 dark:bg-black text-center">
+        <p className="dark:text-white">
           © 2023 rent a product. All rights reserved.
         </p>
       </footer>
@@ -201,10 +189,10 @@ export function Landing() {
       <SheetTrigger asChild>
         <button
           aria-label="Open Cart"
-          className="fixed bottom-4 right-4 p-4 bg-black rounded-full shadow-lg text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black z-50 transform transition-transform duration-200 hover:scale-105"
+          className="fixed bottom-4 bg-black text-white dark:bg-gray-100 right-4 p-4 rounded-full shadow-lg dark:text-black hover:bg-gray-400 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black z-50 transform transition-transform duration-200 hover:scale-105"
         >
                       <svg
-              className=" text-white"
+              className=""
               fill="none"
               height="24"
               stroke="currentColor"
