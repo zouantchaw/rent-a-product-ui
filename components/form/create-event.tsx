@@ -39,7 +39,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface Delivery {
   address: string;
@@ -71,7 +72,7 @@ export function CreateEventForm({
   const [deliveryTime, setDeliveryTime] = useState("");
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("");
-  const { toast } = useToast()
+  const { toast } = useToast();
   const DialogOrSheet = isMobile ? Sheet : Dialog;
   const DialogOrSheetContent = isMobile
     ? (props: React.PropsWithChildren<{}>) => (
@@ -104,8 +105,8 @@ export function CreateEventForm({
             <CardTitle>Create Event</CardTitle>
             <CardDescription>
               <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
-                Welcome! We&apos;re thrilled you&apos;ve chosen us. Let&apos;s kick things off
-                by setting up{" "}
+                Welcome! We&apos;re thrilled you&apos;ve chosen us. Let&apos;s
+                kick things off by setting up{" "}
                 <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">
                   your event
                 </mark>
@@ -130,7 +131,12 @@ export function CreateEventForm({
             {deliveryMethod === "delivery" && (
               <>
                 <div className="space-y-2">
-                  <span>We will collect the delivery address at checkout.</span>
+                  <Alert className="bg-green-200 dark:bg-gray-600">
+                    <AlertTitle>Delivery Info</AlertTitle>
+                    <AlertDescription>
+                      Only available in Frederick, Maryland
+                    </AlertDescription>
+                  </Alert>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="delivery-date">Delivery Date</Label>
@@ -157,7 +163,10 @@ export function CreateEventForm({
             {deliveryMethod === "pickup" && (
               <>
                 <div className="space-y-2">
-                  <Label>Frederick, Maryland</Label>
+                  <Alert className="bg-green-200 dark:bg-gray-600">
+                    <AlertTitle>Pickup Location</AlertTitle>
+                    <AlertDescription>Frederick, Maryland</AlertDescription>
+                  </Alert>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="pickup-date">Pickup Date</Label>
@@ -184,13 +193,18 @@ export function CreateEventForm({
           </CardContent>
         </Card>
         <DialogOrSheetFooter>
-          <Button onClick={() => {
-            toast({
-              title: 'Event Created',
-              description: 'Items in your cart will be linked to this event',
-            })
-            setIsOpen(false)
-          }} type="submit">Save changes</Button>
+          <Button
+            onClick={() => {
+              toast({
+                title: "Event Created",
+                description: "Items in your cart will be linked to this event",
+              });
+              setIsOpen(false);
+            }}
+            type="submit"
+          >
+            Save changes
+          </Button>
         </DialogOrSheetFooter>
       </DialogOrSheetContent>
     </DialogOrSheet>
