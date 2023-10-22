@@ -86,7 +86,7 @@ export function CreateEventForm({
             <CardTitle>Create Event</CardTitle>
             <CardDescription>
               <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
-                Welcome! We're thrilled you've chosen us. Let's kick things off
+                Welcome! We&apos;re thrilled you&apos;ve chosen us. Let&apos;s kick things off
                 by setting up{" "}
                 <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">
                   your event
