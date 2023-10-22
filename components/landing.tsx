@@ -7,10 +7,11 @@ import { Footer } from "@/components/footer";
 import { CartSheet } from "@/components/cart-sheet";
 import { Banner } from "@/components/banner";
 import { products } from "../data";
+import { CreateEventForm } from "./form/create-event";
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
-type SheetSide = (typeof SHEET_SIDES)[number];
+export type SheetSide = (typeof SHEET_SIDES)[number];
 
 
 export function Landing() {
@@ -36,6 +37,7 @@ export function Landing() {
   return (
     <section className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black relative">
       <Header />
+      <CreateEventForm side={sheetSide} sheetWidth={sheetWidth} />
       <Banner />
       <div className="w-3/4 py-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
         {products.map((product, index) => (
