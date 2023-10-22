@@ -74,7 +74,7 @@ export function CreateEventForm({
           <CardHeader>
             <CardTitle>Create Event</CardTitle>
             <CardDescription>
-              Welcome, thank you for choosing us! Let's get started by creating
+              Welcome, thank you for choosing us! Let&apos;s get started by creating
               your event.
             </CardDescription>
           </CardHeader>
