@@ -28,8 +28,14 @@ import {
   CardFooter,
   Card,
 } from "@/components/ui/card";
-import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group"
-import { SelectValue, SelectTrigger, SelectItem, SelectGroup, SelectContent, Select } from "@/components/ui/select"
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectItem,
+  SelectGroup,
+  SelectContent,
+  Select,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
@@ -41,7 +47,7 @@ export function CreateEventForm({
   side: SheetSide;
   sheetWidth: string;
 }) {
-  const [deliveryMethod, setDeliveryMethod] = useState("pickup");
+  const [deliveryMethod, setDeliveryMethod] = useState("");
   const isMobile = !(window.innerWidth >= 768); // 768px for typical breakpoint for larger screens
   const DialogOrSheet = isMobile ? Sheet : Dialog;
   const DialogOrSheetContent = isMobile
@@ -64,59 +70,78 @@ export function CreateEventForm({
   return (
     <DialogOrSheet defaultOpen>
       <DialogOrSheetContent className="w-full">
-      <Card>
-      <CardHeader>
-        <CardTitle>Create Event</CardTitle>
-        <CardDescription>Welcome, thank you for choosing us! Let's get started by creating your event.</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="delivery-method">Delivery Method</Label>
-          <RadioGroup className="flex items-center gap-2" defaultValue="pickup" id="delivery-method" onChange={setDeliveryMethod}>
-            <Label className="cursor-pointer flex items-center gap-2" htmlFor="delivery">
-              <RadioGroupItem id="delivery" value="delivery" />
-              Delivery
-            </Label>
-            <Label className="cursor-pointer flex items-center gap-2" htmlFor="pickup">
-              <RadioGroupItem id="pickup" value="pickup" />
-              Pickup
-            </Label>
-          </RadioGroup>
-        </div>
-        {deliveryMethod === "delivery" && (
-          <>
+        <Card>
+          <CardHeader>
+            <CardTitle>Create Event</CardTitle>
+            <CardDescription>
+              Welcome, thank you for choosing us! Let's get started by creating
+              your event.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="address">Delivery Address</Label>
-              <Input id="address" placeholder="Enter your address" />
+              <Label htmlFor="delivery-method">Delivery or Pickup</Label>
+              <Select onValueChange={setDeliveryMethod} value={deliveryMethod}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a method" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="delivery">Delivery</SelectItem>
+                    <SelectItem value="pickup">Pickup</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="delivery-date">Delivery Date</Label>
-              <Input id="delivery-date" placeholder="Enter delivery date" type="date" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="delivery-time">Delivery Time</Label>
-              <Input id="delivery-time" placeholder="Enter delivery time" type="time" />
-            </div>
-          </>
-        )}
-        {deliveryMethod === "pickup" && (
-          <>
-            <div className="space-y-2">
-              <Label>Warehouse Location</Label>
-              <span>123 Warehouse Street, City, State, Zip</span>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="pickup-date">Pickup Date</Label>
-              <Input id="pickup-date" placeholder="Enter pickup date" type="date" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="pickup-time">Pickup Time</Label>
-              <Input id="pickup-time" placeholder="Enter pickup time" type="time" />
-            </div>
-          </>
-        )}
-      </CardContent>
-    </Card>
+            {deliveryMethod === "delivery" && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="address">Delivery Address</Label>
+                  <Input id="address" placeholder="Enter your address" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="delivery-date">Delivery Date</Label>
+                  <Input
+                    id="delivery-date"
+                    placeholder="Enter delivery date"
+                    type="date"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="delivery-time">Delivery Time</Label>
+                  <Input
+                    id="delivery-time"
+                    placeholder="Enter delivery time"
+                    type="time"
+                  />
+                </div>
+              </>
+            )}
+            {deliveryMethod === "pickup" && (
+              <>
+                <div className="space-y-2">
+                  <Label>Frederick, Maryland</Label>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="pickup-date">Pickup Date</Label>
+                  <Input
+                    id="pickup-date"
+                    placeholder="Enter pickup date"
+                    type="date"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="pickup-time">Pickup Time</Label>
+                  <Input
+                    id="pickup-time"
+                    placeholder="Enter pickup time"
+                    type="time"
+                  />
+                </div>
+              </>
+            )}
+          </CardContent>
+        </Card>
         <DialogOrSheetFooter>
           <Button type="submit">Save changes</Button>
         </DialogOrSheetFooter>
