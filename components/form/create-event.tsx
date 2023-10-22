@@ -1,5 +1,6 @@
-'use client';
-import { Button } from "@/components/ui/button"
+"use client";
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Sheet,
   SheetClose,
@@ -18,52 +19,108 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { SheetSide } from "../landing"
+} from "@/components/ui/sheet";
+import {
+  CardTitle,
+  CardDescription,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  Card,
+} from "@/components/ui/card";
+import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group"
+import { SelectValue, SelectTrigger, SelectItem, SelectGroup, SelectContent, Select } from "@/components/ui/select"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { SheetSide } from "../landing";
 
-export function CreateEventForm({ side, sheetWidth }: { side: SheetSide; sheetWidth: string }) {
-  const isMobile = !(window.innerWidth >= 768) // 768px for typical breakpoint for larger screens
+export function CreateEventForm({
+  side,
+  sheetWidth,
+}: {
+  side: SheetSide;
+  sheetWidth: string;
+}) {
+  const [deliveryMethod, setDeliveryMethod] = useState("pickup");
+  const isMobile = !(window.innerWidth >= 768); // 768px for typical breakpoint for larger screens
   const DialogOrSheet = isMobile ? Sheet : Dialog;
-  const DialogOrSheetContent = isMobile 
-  ? (props: React.PropsWithChildren<{}>) => <SheetContent side={side} className={`${sheetWidth} bg-white dark:bg-gray-900`} {...props} /> 
-  : DialogContent;
+  const DialogOrSheetContent = isMobile
+    ? (props: React.PropsWithChildren<{}>) => (
+        <SheetContent
+          side={side}
+          className={`${sheetWidth} bg-white dark:bg-gray-900`}
+          {...props}
+        />
+      )
+    : DialogContent;
   const DialogOrSheetTrigger = isMobile ? SheetTrigger : DialogTrigger;
   const DialogOrSheetHeader = isMobile ? SheetHeader : DialogHeader;
   const DialogOrSheetTitle = isMobile ? SheetTitle : DialogTitle;
-  const DialogOrSheetDescription = isMobile ? SheetDescription : DialogDescription;
+  const DialogOrSheetDescription = isMobile
+    ? SheetDescription
+    : DialogDescription;
   const DialogOrSheetFooter = isMobile ? SheetFooter : DialogFooter;
 
   return (
     <DialogOrSheet defaultOpen>
       <DialogOrSheetContent className="w-full">
-        <DialogOrSheetHeader>
-          <DialogOrSheetTitle>Create Event</DialogOrSheetTitle>
-          <DialogOrSheetDescription>
-            Welcome, tell us about your event.
-          </DialogOrSheetDescription>
-        </DialogOrSheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
+      <Card>
+      <CardHeader>
+        <CardTitle>Create Event</CardTitle>
+        <CardDescription>Welcome, thank you for choosing us! Let's get started by creating your event.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="delivery-method">Delivery Method</Label>
+          <RadioGroup className="flex items-center gap-2" defaultValue="pickup" id="delivery-method" onChange={setDeliveryMethod}>
+            <Label className="cursor-pointer flex items-center gap-2" htmlFor="delivery">
+              <RadioGroupItem id="delivery" value="delivery" />
+              Delivery
             </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
+            <Label className="cursor-pointer flex items-center gap-2" htmlFor="pickup">
+              <RadioGroupItem id="pickup" value="pickup" />
+              Pickup
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
+          </RadioGroup>
         </div>
+        {deliveryMethod === "delivery" && (
+          <>
+            <div className="space-y-2">
+              <Label htmlFor="address">Delivery Address</Label>
+              <Input id="address" placeholder="Enter your address" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="delivery-date">Delivery Date</Label>
+              <Input id="delivery-date" placeholder="Enter delivery date" type="date" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="delivery-time">Delivery Time</Label>
+              <Input id="delivery-time" placeholder="Enter delivery time" type="time" />
+            </div>
+          </>
+        )}
+        {deliveryMethod === "pickup" && (
+          <>
+            <div className="space-y-2">
+              <Label>Warehouse Location</Label>
+              <span>123 Warehouse Street, City, State, Zip</span>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="pickup-date">Pickup Date</Label>
+              <Input id="pickup-date" placeholder="Enter pickup date" type="date" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="pickup-time">Pickup Time</Label>
+              <Input id="pickup-time" placeholder="Enter pickup time" type="time" />
+            </div>
+          </>
+        )}
+      </CardContent>
+    </Card>
         <DialogOrSheetFooter>
           <Button type="submit">Save changes</Button>
         </DialogOrSheetFooter>
       </DialogOrSheetContent>
     </DialogOrSheet>
-  )
+  );
 }
-
-
