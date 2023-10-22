@@ -39,6 +39,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
+import { useToast } from "@/components/ui/use-toast"
 
 export function CreateEventForm({
   isOpen,
@@ -54,6 +55,7 @@ export function CreateEventForm({
   sheetWidth: string;
 }) {
   const [deliveryMethod, setDeliveryMethod] = useState("");
+  const { toast } = useToast()
   const DialogOrSheet = isMobile ? Sheet : Dialog;
   const DialogOrSheetContent = isMobile
     ? (props: React.PropsWithChildren<{}>) => (
@@ -159,7 +161,13 @@ export function CreateEventForm({
           </CardContent>
         </Card>
         <DialogOrSheetFooter>
-          <Button type="submit">Save changes</Button>
+          <Button onClick={() => {
+            toast({
+              title: 'Event Created',
+              description: 'Items in your cart will be linked to this event',
+            })
+            setIsOpen(false)
+          }} type="submit">Save changes</Button>
         </DialogOrSheetFooter>
       </DialogOrSheetContent>
     </DialogOrSheet>
