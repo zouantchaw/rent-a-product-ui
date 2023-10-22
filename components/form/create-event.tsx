@@ -8,11 +8,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -20,14 +18,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  Card,
-} from "@/components/ui/card";
 import {
   SelectValue,
   SelectTrigger,
@@ -67,7 +57,6 @@ export function CreateEventForm({
   sheetWidth: string;
 }) {
   const [deliveryMethod, setDeliveryMethod] = useState("");
-  const [address, setAddress] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
   const [deliveryTime, setDeliveryTime] = useState("");
   const [pickupDate, setPickupDate] = useState("");
@@ -83,7 +72,6 @@ export function CreateEventForm({
         />
       )
     : DialogContent;
-  const DialogOrSheetTrigger = isMobile ? SheetTrigger : DialogTrigger;
   const DialogOrSheetHeader = isMobile ? SheetHeader : DialogHeader;
   const DialogOrSheetTitle = isMobile ? SheetTitle : DialogTitle;
   const DialogOrSheetDescription = isMobile
@@ -96,102 +84,100 @@ export function CreateEventForm({
       open={isOpen}
       onOpenChange={(open: boolean) => {
         console.log("onOpenChange");
-        setIsOpen(open);
+        setIsOpen(false);
       }}
     >
       <DialogOrSheetContent className="w-full">
-        <Card>
-          <CardHeader>
-            <CardTitle>Create Event</CardTitle>
-            <CardDescription>
-              <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
-                Welcome! We&apos;re thrilled you&apos;ve chosen us. Let&apos;s
-                kick things off by setting up{" "}
-                <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">
-                  your event
-                </mark>
-              </span>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="delivery-method">Delivery or Pickup</Label>
-              <Select onValueChange={setDeliveryMethod} value={deliveryMethod}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a method" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="delivery">Delivery</SelectItem>
-                    <SelectItem value="pickup">Pickup</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            {deliveryMethod === "delivery" && (
-              <>
-                <div className="space-y-2">
-                  <Alert className="bg-green-200 dark:bg-gray-600">
-                    <AlertTitle>Delivery Info</AlertTitle>
-                    <AlertDescription>
-                      Only available in Frederick, Maryland
-                    </AlertDescription>
-                  </Alert>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="delivery-date">Delivery Date</Label>
-                  <Input
-                    id="delivery-date"
-                    placeholder="Enter delivery date"
-                    type="date"
-                    value={deliveryDate}
-                    onChange={(e) => setDeliveryDate(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="delivery-time">Delivery Time</Label>
-                  <Input
-                    id="delivery-time"
-                    placeholder="Enter delivery time"
-                    type="time"
-                    value={deliveryTime}
-                    onChange={(e) => setDeliveryTime(e.target.value)}
-                  />
-                </div>
-              </>
-            )}
-            {deliveryMethod === "pickup" && (
-              <>
-                <div className="space-y-2">
-                  <Alert className="bg-green-200 dark:bg-gray-600">
-                    <AlertTitle>Pickup Location</AlertTitle>
-                    <AlertDescription>Frederick, Maryland</AlertDescription>
-                  </Alert>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="pickup-date">Pickup Date</Label>
-                  <Input
-                    id="pickup-date"
-                    placeholder="Enter pickup date"
-                    type="date"
-                    value={pickupDate}
-                    onChange={(e) => setPickupDate(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="pickup-time">Pickup Time</Label>
-                  <Input
-                    id="pickup-time"
-                    placeholder="Enter pickup time"
-                    type="time"
-                    value={pickupTime}
-                    onChange={(e) => setPickupTime(e.target.value)}
-                  />
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
+        <DialogOrSheetHeader>
+          <DialogOrSheetTitle>Create Event</DialogOrSheetTitle>
+          <DialogOrSheetDescription>
+            <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
+              Welcome! We&apos;re thrilled you&apos;ve chosen us. Let&apos;s
+              kick things off by setting up{" "}
+              <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">
+                your event
+              </mark>
+            </span>
+          </DialogOrSheetDescription>
+        </DialogOrSheetHeader>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="delivery-method">Delivery or Pickup</Label>
+            <Select onValueChange={setDeliveryMethod} value={deliveryMethod}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a method" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="delivery">Delivery</SelectItem>
+                  <SelectItem value="pickup">Pickup</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          {deliveryMethod === "delivery" && (
+            <>
+              <div className="space-y-2">
+                <Alert className="bg-green-200 dark:bg-gray-600">
+                  <AlertTitle>Delivery Info</AlertTitle>
+                  <AlertDescription>
+                    Only available in Frederick, Maryland
+                  </AlertDescription>
+                </Alert>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="delivery-date">Delivery Date</Label>
+                <Input
+                  id="delivery-date"
+                  placeholder="Enter delivery date"
+                  type="date"
+                  value={deliveryDate}
+                  onChange={(e) => setDeliveryDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="delivery-time">Delivery Time</Label>
+                <Input
+                  id="delivery-time"
+                  placeholder="Enter delivery time"
+                  type="time"
+                  value={deliveryTime}
+                  onChange={(e) => setDeliveryTime(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+          {deliveryMethod === "pickup" && (
+            <>
+              <div className="space-y-2">
+                <Alert className="bg-green-200 dark:bg-gray-600">
+                  <AlertTitle>Pickup Location</AlertTitle>
+                  <AlertDescription>Frederick, Maryland</AlertDescription>
+                </Alert>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="pickup-date">Pickup Date</Label>
+                <Input
+                  id="pickup-date"
+                  placeholder="Enter pickup date"
+                  type="date"
+                  value={pickupDate}
+                  onChange={(e) => setPickupDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="pickup-time">Pickup Time</Label>
+                <Input
+                  id="pickup-time"
+                  placeholder="Enter pickup time"
+                  type="time"
+                  value={pickupTime}
+                  onChange={(e) => setPickupTime(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+        </div>
         <DialogOrSheetFooter>
           <Button
             onClick={() => {
