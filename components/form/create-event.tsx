@@ -73,17 +73,24 @@ export function CreateEventForm({
   const DialogOrSheetFooter = isMobile ? SheetFooter : DialogFooter;
 
   return (
-    <DialogOrSheet open={isOpen} onOpenChange={() => {
-      console.log("onOpenChange");
-    }}>
+    <DialogOrSheet
+      open={isOpen}
+      onOpenChange={(open: boolean) => {
+        console.log("onOpenChange");
+        setIsOpen(open);
+      }}
+    >
       <DialogOrSheetContent className="w-full">
         <Card>
           <CardHeader>
             <CardTitle>Create Event</CardTitle>
             <CardDescription>
               <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
-                Welcome! We're thrilled you've chosen us. Let's kick things off by
-                setting up <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">your event</mark>
+                Welcome! We're thrilled you've chosen us. Let's kick things off
+                by setting up{" "}
+                <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">
+                  your event
+                </mark>
               </span>
             </CardDescription>
           </CardHeader>
