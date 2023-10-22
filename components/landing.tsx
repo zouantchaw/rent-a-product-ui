@@ -20,17 +20,18 @@ export function Landing() {
   const [sheetSide, setSheetSide] = useState<SheetSide>("bottom");
   const [width] = useWindowSize();
 
+  const updateSheetSide = () => {
+    if (width >= 768) {
+      // 768px for typical breakpoint for larger screens
+      setIsMobile(false);
+      setSheetSide("right");
+    } else {
+      setIsMobile(true);
+      setSheetSide("bottom");
+    }
+  };
+
   useEffect(() => {
-    const updateSheetSide = () => {
-      if (width >= 768) {
-        // 768px for typical breakpoint for larger screens
-        setIsMobile(false);
-        setSheetSide("right");
-      } else {
-        setIsMobile(true);
-        setSheetSide("bottom");
-      }
-    };
     updateSheetSide();
     setIsOpen(true);
   }, [width]);
