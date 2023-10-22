@@ -1,3 +1,4 @@
+'use client';
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -35,15 +36,12 @@ export function CreateEventForm({ side, sheetWidth }: { side: SheetSide; sheetWi
   const DialogOrSheetFooter = isMobile ? SheetFooter : DialogFooter;
 
   return (
-    <DialogOrSheet modal={false}>
-      <DialogOrSheetTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogOrSheetTrigger>
-      <DialogOrSheetContent className="">
+    <DialogOrSheet defaultOpen>
+      <DialogOrSheetContent className="w-full">
         <DialogOrSheetHeader>
-          <DialogOrSheetTitle>Edit profile</DialogOrSheetTitle>
+          <DialogOrSheetTitle>Create Event</DialogOrSheetTitle>
           <DialogOrSheetDescription>
-            Make changes to your profile here. Click save when you're done.
+            Welcome, tell us about your event.
           </DialogOrSheetDescription>
         </DialogOrSheetHeader>
         <div className="grid gap-4 py-4">
@@ -67,4 +65,5 @@ export function CreateEventForm({ side, sheetWidth }: { side: SheetSide; sheetWi
     </DialogOrSheet>
   )
 }
+
 
