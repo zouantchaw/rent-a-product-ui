@@ -8,6 +8,9 @@ import { CartSheet } from "@/components/cart-sheet";
 import { Banner } from "@/components/banner";
 import { products } from "../data";
 import { CreateEventForm } from "./form/create-event";
+import {
+  useWindowSize,
+} from '@react-hook/window-size'
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
@@ -15,29 +18,31 @@ export type SheetSide = (typeof SHEET_SIDES)[number];
 
 
 export function Landing() {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [sheetSide, setSheetSide] = useState<SheetSide>("bottom");
+  const [width] = useWindowSize();
 
   useEffect(() => {
     const updateSheetSide = () => {
-      if (window.innerWidth >= 768) {
+      if (width >= 768) {
         // 768px for typical breakpoint for larger screens
+        setIsMobile(false);
         setSheetSide("right");
       } else {
+        setIsMobile(true);
         setSheetSide("bottom");
       }
     };
-
     updateSheetSide();
-    window.addEventListener("resize", updateSheetSide);
-
-    return () => window.removeEventListener("resize", updateSheetSide);
-  }, []);
+    setIsOpen(true);
+  }, [width]);
 
   const sheetWidth = sheetSide === "bottom" ? "100%" : "80 md:w-64";
   return (
     <section className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black relative">
       <Header />
-      <CreateEventForm side={sheetSide} sheetWidth={sheetWidth} />
+      <CreateEventForm isOpen={isOpen} setIsOpen={setIsOpen} isMobile={isMobile} side={sheetSide} sheetWidth={sheetWidth} />
       <Banner />
       <div className="w-3/4 py-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
         {products.map((product, index) => (

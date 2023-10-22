@@ -41,14 +41,19 @@ import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
 
 export function CreateEventForm({
+  isOpen,
+  setIsOpen,
+  isMobile,
   side,
   sheetWidth,
 }: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isMobile: boolean;
   side: SheetSide;
   sheetWidth: string;
 }) {
   const [deliveryMethod, setDeliveryMethod] = useState("");
-  const isMobile = !(window.innerWidth >= 768); // 768px for typical breakpoint for larger screens
   const DialogOrSheet = isMobile ? Sheet : Dialog;
   const DialogOrSheetContent = isMobile
     ? (props: React.PropsWithChildren<{}>) => (
@@ -68,14 +73,18 @@ export function CreateEventForm({
   const DialogOrSheetFooter = isMobile ? SheetFooter : DialogFooter;
 
   return (
-    <DialogOrSheet defaultOpen>
+    <DialogOrSheet open={isOpen} onOpenChange={() => {
+      console.log("onOpenChange");
+    }}>
       <DialogOrSheetContent className="w-full">
         <Card>
           <CardHeader>
             <CardTitle>Create Event</CardTitle>
             <CardDescription>
-              Welcome, thank you for choosing us! Let&apos;s get started by creating
-              your event.
+              <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
+                Welcome! We're thrilled you've chosen us. Let's kick things off by
+                setting up <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">your event</mark>
+              </span>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
