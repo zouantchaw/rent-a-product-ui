@@ -178,7 +178,7 @@ export function CreateEventForm({
             </>
           )}
         </div>
-        <DialogOrSheetFooter>
+        <DialogOrSheetFooter className="mt-4">
           <Button
             onClick={() => {
               toast({
