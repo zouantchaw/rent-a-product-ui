@@ -41,6 +41,17 @@ import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
 import { useToast } from "@/components/ui/use-toast"
 
+interface Delivery {
+  address: string;
+  date: string;
+  time: string;
+}
+
+interface Pickup {
+  date: string;
+  time: string;
+}
+
 export function CreateEventForm({
   isOpen,
   setIsOpen,
@@ -55,6 +66,11 @@ export function CreateEventForm({
   sheetWidth: string;
 }) {
   const [deliveryMethod, setDeliveryMethod] = useState("");
+  const [address, setAddress] = useState("");
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [deliveryTime, setDeliveryTime] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
   const { toast } = useToast()
   const DialogOrSheet = isMobile ? Sheet : Dialog;
   const DialogOrSheetContent = isMobile
@@ -114,8 +130,7 @@ export function CreateEventForm({
             {deliveryMethod === "delivery" && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="address">Delivery Address</Label>
-                  <Input id="address" placeholder="Enter your address" />
+                  <span>We will collect the delivery address at checkout.</span>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="delivery-date">Delivery Date</Label>
@@ -123,6 +138,8 @@ export function CreateEventForm({
                     id="delivery-date"
                     placeholder="Enter delivery date"
                     type="date"
+                    value={deliveryDate}
+                    onChange={(e) => setDeliveryDate(e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
@@ -131,6 +148,8 @@ export function CreateEventForm({
                     id="delivery-time"
                     placeholder="Enter delivery time"
                     type="time"
+                    value={deliveryTime}
+                    onChange={(e) => setDeliveryTime(e.target.value)}
                   />
                 </div>
               </>
@@ -146,6 +165,8 @@ export function CreateEventForm({
                     id="pickup-date"
                     placeholder="Enter pickup date"
                     type="date"
+                    value={pickupDate}
+                    onChange={(e) => setPickupDate(e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
@@ -154,6 +175,8 @@ export function CreateEventForm({
                     id="pickup-time"
                     placeholder="Enter pickup time"
                     type="time"
+                    value={pickupTime}
+                    onChange={(e) => setPickupTime(e.target.value)}
                   />
                 </div>
               </>
