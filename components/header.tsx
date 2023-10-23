@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, setLocale }) => {
           width={80}
         />
         <h2 className="ml-2 text-2xl font-bold text-gray-900 dark:text-white sm:ml-4 sm:text-3xl">
-          Klutch Rentals
+          Diane Party Rentals
         </h2>
       </div>
       <div className="flex space-x-4">

@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 const image = "/klutch-logo.png";
 
 export const metadata: Metadata = {
-  title: "Klutch Rentals",
+  title: "Diane Party Rentals",
   description: "DMV's premier party and event rental company",
   icons: [image],
 };
