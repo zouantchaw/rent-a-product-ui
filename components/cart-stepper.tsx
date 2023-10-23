@@ -4,94 +4,119 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { products, Product } from "../data";
+import { CartItem } from "@/components/landing";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-export function CartStepper() {
+interface CartStepperProps {
+  cart: CartItem[];
+  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
+}
+
+export function CartStepper({ cart, setCart }: CartStepperProps) {
   const [step, setStep] = useState(0);
 
   const nextStep = () => {
     setStep(step + 1);
   };
 
+  const prevStep = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
+  const updateQuantity = (id: string, quantity: number) => {
+    setCart(
+      cart
+        .map((item) => (item.id === id ? { ...item, quantity } : item))
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
   return (
     <div className="w-full max-w-3xl transition-all duration-500 ease-in-out">
+      {step !== 0 && (
+        <Button
+          onClick={prevStep}
+          className="mb-3 bg-transparent text-gray-500 hover:text-gray-200 dark:text-white dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:focus:ring-gray-400 z-50 transform transition-transform duration-200 hover:scale-105"
+        >
+          {" "}
+          <svg
+            className=" text-gray-500 h-4 w-4 mr-2"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="m12 19-7-7 7-7" />
+            <path d="M19 12H5" />
+          </svg>
+        </Button>
+      )}
       {step === 0 && (
         <Card className="transition-all duration-500 ease-in-out">
           <CardHeader>
             <CardTitle>Your Cart</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 transition-all duration-500 ease-in-out">
-            <div className="border p-4 rounded-md transition-all duration-500 ease-in-out">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <img
-                    alt="Product 1"
-                    height="50"
-                    src="/placeholder.svg"
-                    style={{
-                      aspectRatio: "50/50",
-                      objectFit: "cover",
-                    }}
-                    width="50"
-                  />
-                  <div className="font-semibold">Product 1</div>
-                </div>
-                <div>$99</div>
-              </div>
-              <div className="flex items-center justify-between mt-2">
-                <div className="text-sm text-gray-500">Quantity:</div>
-                <div className="flex items-center space-x-2">
-                  <Button
-                    className="transition-all duration-500 ease-in-out"
-                    variant="outline"
+            {cart.map((item, index) => {
+              const product = products.find((p) => p.id === item.id);
+              return product ? (
+                <ScrollArea className="rounded-md border">
+                  <div
+                    key={index}
+                    className="border p-4 rounded-md transition-all duration-500 ease-in-out"
                   >
-                    -
-                  </Button>
-                  <div>1</div>
-                  <Button
-                    className="transition-all duration-500 ease-in-out"
-                    variant="outline"
-                  >
-                    +
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="border p-4 rounded-md transition-all duration-500 ease-in-out">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <img
-                    alt="Product 2"
-                    height="50"
-                    src="/placeholder.svg"
-                    style={{
-                      aspectRatio: "50/50",
-                      objectFit: "cover",
-                    }}
-                    width="50"
-                  />
-                  <div className="font-semibold">Product 2</div>
-                </div>
-                <div>$199</div>
-              </div>
-              <div className="flex items-center justify-between mt-2">
-                <div className="text-sm text-gray-500">Quantity:</div>
-                <div className="flex items-center space-x-2">
-                  <Button
-                    className="transition-all duration-500 ease-in-out"
-                    variant="outline"
-                  >
-                    -
-                  </Button>
-                  <div>1</div>
-                  <Button
-                    className="transition-all duration-500 ease-in-out"
-                    variant="outline"
-                  >
-                    +
-                  </Button>
-                </div>
-              </div>
-            </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <img
+                          alt={product.name}
+                          height="50"
+                          src={product.image}
+                          style={{
+                            aspectRatio: "50/50",
+                            objectFit: "cover",
+                          }}
+                          width="50"
+                        />
+                        <div className="font-semibold">{product.name}</div>
+                      </div>
+                      <div>${product.price}</div>
+                    </div>
+                    <div className="flex items-center justify-between mt-2">
+                      <div className="text-sm text-gray-500">Quantity:</div>
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          className="transition-all duration-500 ease-in-out"
+                          variant="outline"
+                        >
+                          -
+                        </Button>
+                        <div>{item.quantity}</div>
+                        <Button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          className="transition-all duration-500 ease-in-out"
+                          variant="outline"
+                        >
+                          +
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollArea>
+              ) : null;
+            })}
             <Button
               onClick={nextStep}
               className="w-full mt-4 transition-all duration-500 ease-in-out"

@@ -10,7 +10,7 @@ import {
 import { CartButton } from "@/components/ui/cart-button";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/components/landing";
-import { CartStepper } from "./cart-tabs";
+import { CartStepper } from "./cart-stepper";
 
 interface CartSheetProps {
   sheetSide: "top" | "right" | "bottom" | "left" | null | undefined;
@@ -69,7 +69,7 @@ export const CartSheet: React.FC<CartSheetProps> = ({
             <Button variant="default">Checkout</Button>
           </CardFooter>
         </Card> */}
-        <CartStepper />
+        <CartStepper cart={cart} setCart={setCart} />
       </SheetContent>
     </Sheet>
   );

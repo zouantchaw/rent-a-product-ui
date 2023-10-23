@@ -8,6 +8,7 @@ import { CartItem } from "@/components/landing";
 interface ProductCardProps {
   alt: string;
   src: string;
+  id: string;
   title: string;
   price: number;
   color: string;
@@ -19,6 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   alt,
   src,
   title,
+  id,
   price,
   color,
   cart,
@@ -27,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [quantity, setQuantity] = useState<number>(1);
 
   const addToCart = () => {
-    const newCartItem: CartItem = { id: title, quantity: quantity };
+    const newCartItem: CartItem = { id: id, quantity: quantity };
     const existingCartItemIndex = cart.findIndex((item) => item.id === title);
     if (existingCartItemIndex > -1) {
       const updatedCart = [...cart];
