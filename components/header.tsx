@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ModeToggle } from "./mode-toggle";
 import { LangSelector } from "./lang-selector";
+import { getDictionary } from '@/util/get-dictionary';
 
-export const Header: React.FC = () => {
+
+interface HeaderProps {
+  locale: string;
+  setLocale: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const Header: React.FC<HeaderProps> = ({ locale, setLocale }) => {
+
+  useEffect(() => {
+    const fetchDict = async () => {
+      const result = await getDictionary("en"); // en
+      console.log(result);
+    };
+
+    fetchDict();
+  }, []);
   return (
     <div className="flex justify-between items-center w-full px-4 sm:px-8 py-2">
       <div className="flex items-center">

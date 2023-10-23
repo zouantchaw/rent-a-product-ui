@@ -9,15 +9,42 @@ import { Banner } from "@/components/banner";
 import { products } from "../data";
 import { CreateEventForm } from "./form/create-event";
 import { useWindowSize } from "@react-hook/window-size";
+import { getDictionary } from "../util/get-dictionary";
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
 export type SheetSide = (typeof SHEET_SIDES)[number];
 
+export type Dictionary = {
+  greeting: string;
+  products: {
+    cart: string;
+    checkout: string;
+  };
+  event: {
+    create: string;
+    date: string;
+    time: string;
+  };
+};
+
 export function Landing() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [sheetSide, setSheetSide] = useState<SheetSide>("bottom");
+  const [locale, setLocale] = useState<string>("en");
+  const [dictionary, setDictionary] = useState<Dictionary>({
+    greeting: "",
+    products: {
+      cart: "",
+      checkout: "",
+    },
+    event: {
+      create: "",
+      date: "",
+      time: "",
+    },
+  });
   const [width] = useWindowSize();
 
   const updateSheetSide = () => {
@@ -36,11 +63,21 @@ export function Landing() {
     setIsOpen(true);
   }, [width]);
 
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dict = await getDictionary(locale); // Await the Promise
+      setDictionary(dict);
+    };
+
+    fetchDictionary();
+  }, [locale]); // Depend on locale
+
   const sheetWidth = sheetSide === "bottom" ? "100%" : "80 md:w-64";
   return (
     <section className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black relative">
-      <Header />
+      <Header locale={locale} setLocale={setLocale} />
       <CreateEventForm
+        dictionary={dictionary}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         isMobile={isMobile}

@@ -31,7 +31,7 @@ import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
 import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { LangSelector } from "../lang-selector";
+import { Dictionary } from "../landing";
 
 interface Delivery {
   address: string;
@@ -45,12 +45,14 @@ interface Pickup {
 }
 
 export function CreateEventForm({
+  dictionary,
   isOpen,
   setIsOpen,
   isMobile,
   side,
   sheetWidth,
 }: {
+  dictionary: Dictionary;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isMobile: boolean;

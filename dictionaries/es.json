@@ -1,0 +1,12 @@
+{
+  "greeting": "Hola",
+  "products": {
+    "cart": "Añadir al carrito",
+    "checkout": "Finalizar compra"
+  },
+  "event": {
+    "create": "Crear evento",
+    "date": "Fecha del evento",
+    "time": "Hora del evento"
+  }
+}

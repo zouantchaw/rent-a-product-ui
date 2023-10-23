@@ -1,0 +1,12 @@
+{
+  "greeting": "Hello",
+  "products": {
+    "cart": "Add to Cart",
+    "checkout": "Checkout"
+  },
+  "event": {
+    "create": "Create Event",
+    "date": "Event Date",
+    "time": "Event Time"
+  }
+}
