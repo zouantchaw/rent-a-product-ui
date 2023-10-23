@@ -28,6 +28,11 @@ export type Dictionary = {
   };
 };
 
+export type CartItem = {
+  id: string;
+  quantity: number;
+};
+
 export function Landing() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -46,6 +51,18 @@ export function Landing() {
     },
   });
   const [width] = useWindowSize();
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    const savedCart = window.localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const updateSheetSide = () => {
     if (width >= 768) {
@@ -93,12 +110,14 @@ export function Landing() {
             src={product.image}
             title={product.name}
             price={product.price}
-            color={product.color} 
+            color={product.color}
+            cart={cart}
+            setCart={setCart}
           />
         ))}
       </div>
       <Footer />
-      <CartSheet sheetSide={sheetSide} sheetWidth={sheetWidth} />
+      <CartSheet sheetSide={sheetSide} sheetWidth={sheetWidth} cart={cart} setCart={setCart} />
     </section>
   );
 }

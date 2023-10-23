@@ -9,15 +9,20 @@ import {
 } from "@/components/ui/card";
 import { CartButton } from "@/components/ui/cart-button";
 import { Button } from "@/components/ui/button";
+import { CartItem } from "@/components/landing";
 
 interface CartSheetProps {
   sheetSide: "top" | "right" | "bottom" | "left" | null | undefined;
   sheetWidth: string;
+  cart: CartItem[];
+  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
 }
 
 export const CartSheet: React.FC<CartSheetProps> = ({
   sheetSide,
   sheetWidth,
+  cart,
+  setCart,
 }) => {
   return (
     <Sheet>
@@ -42,6 +47,9 @@ export const CartSheet: React.FC<CartSheetProps> = ({
             <circle cx="19" cy="21" r="1" />
             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
           </svg>
+          <span className="absolute top-0 right-0 bg-red-500 rounded-full text-white text-xs w-5 h-5 flex items-center justify-center">
+            {cart.reduce((total, item) => total + item.quantity, 0)}
+          </span>
         </button>
       </SheetTrigger>
       <SheetContent
