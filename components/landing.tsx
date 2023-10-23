@@ -87,13 +87,13 @@ export function Landing() {
       <Banner />
       <div className="w-3/4 py-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
         {products.map((product, index) => (
-          <ProductCard
+          <ProductCard 
             key={product.id || index}
             alt="Product Image"
             src={product.image}
             title={product.name}
             price={product.price}
-            color={product.color}
+            color={product.color} 
           />
         ))}
       </div>
