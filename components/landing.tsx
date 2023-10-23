@@ -89,7 +89,7 @@ export function Landing() {
     fetchDictionary();
   }, [locale]); // Depend on locale
 
-  const sheetWidth = sheetSide === "bottom" ? "100%" : "80 md:w-64";
+  const sheetWidth = sheetSide === "bottom" ? "100%" : "80 md:w-full";
   return (
     <section className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black relative">
       <Header locale={locale} setLocale={setLocale} />

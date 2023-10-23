@@ -10,6 +10,7 @@ import {
 import { CartButton } from "@/components/ui/cart-button";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/components/landing";
+import { CartTabs } from "./cart-tabs";
 
 interface CartSheetProps {
   sheetSide: "top" | "right" | "bottom" | "left" | null | undefined;
@@ -57,7 +58,7 @@ export const CartSheet: React.FC<CartSheetProps> = ({
         className={`${sheetWidth} bg-white dark:bg-gray-900`}
       >
         {/* ... rest of the Sheet content ... */}
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle>Your Cart</CardTitle>
           </CardHeader>
@@ -67,7 +68,8 @@ export const CartSheet: React.FC<CartSheetProps> = ({
           <CardFooter>
             <Button variant="default">Checkout</Button>
           </CardFooter>
-        </Card>
+        </Card> */}
+        <CartTabs />
       </SheetContent>
     </Sheet>
   );
