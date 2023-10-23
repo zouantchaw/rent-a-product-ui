@@ -31,6 +31,7 @@ import { Label } from "@/components/ui/label";
 import { SheetSide } from "../landing";
 import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { LangSelector } from "../lang-selector";
 
 interface Delivery {
   address: string;

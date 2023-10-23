@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ModeToggle } from "./mode-toggle";
+import { LangSelector } from "./lang-selector";
 
 export const Header: React.FC = () => {
   return (
@@ -18,7 +19,10 @@ export const Header: React.FC = () => {
           Klutch Rentals
         </h2>
       </div>
-      <ModeToggle />
+      <div className="flex space-x-4">
+        <LangSelector />
+        <ModeToggle />
+      </div>
     </div>
   );
 };
