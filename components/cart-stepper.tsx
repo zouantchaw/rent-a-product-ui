@@ -35,7 +35,7 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
   };
 
   const renderCartContent = () => (
-    <CardContent className="space-y-4 transition-all duration-500 ease-in-out">
+    <div>
       {cart.map((item, index) => {
         const product = products.find((p) => p.id === item.id);
         return product ? (
@@ -79,13 +79,7 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
           </div>
         ) : null;
       })}
-                <Button
-            onClick={nextStep}
-            className="w-full mt-4 transition-all duration-500 ease-in-out"
-          >
-            Proceed to Confirmation
-          </Button>
-    </CardContent>
+    </div>
   );
 
   return (
@@ -119,11 +113,27 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
             <CardTitle>Your Cart</CardTitle>
           </CardHeader>
           {cart.length > 3 ? (
-            <ScrollArea className="max-h-96 overflow-y-auto flex-grow">
-              {renderCartContent()}
-            </ScrollArea>
+            <CardContent className="space-y-4 transition-all duration-500 ease-in-out">
+              <ScrollArea className="max-h-96 overflow-y-auto flex-grow">
+                {renderCartContent()}
+              </ScrollArea>
+              <Button
+                onClick={nextStep}
+                className="w-full mt-4 transition-all duration-500 ease-in-out"
+              >
+                Proceed to Confirmation
+              </Button>
+            </CardContent>
           ) : (
-            renderCartContent()
+            <CardContent className="space-y-4 transition-all duration-500 ease-in-out flex-grow">
+              {renderCartContent()}
+              <Button
+                onClick={nextStep}
+                className="w-full mt-4 transition-all duration-500 ease-in-out"
+              >
+                Proceed to Confirmation
+              </Button>
+            </CardContent>
           )}
         </Card>
       )}
