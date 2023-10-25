@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState, useEffect } from "react";
 import {} from "@/components/ui/popover";
 import { Header } from "@/components/header";
@@ -33,6 +33,15 @@ export type CartItem = {
   quantity: number;
 };
 
+export interface EventDetails {
+  type: "delivery" | "pickup";
+  deliveryDate?: string;
+  deliveryTime?: string;
+  deliveryAddress?: string;
+  pickupDate?: string;
+  pickupTime?: string;
+}
+
 export function Landing() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -40,7 +49,7 @@ export function Landing() {
   const [locale, setLocale] = useState<string>("en");
   const [dictionary, setDictionary] = useState<Dictionary>({
     greeting: "",
-    products: { 
+    products: {
       cart: "",
       checkout: "",
     },
@@ -51,18 +60,20 @@ export function Landing() {
     },
   });
   const [width] = useWindowSize();
-  const [cart, setCart] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    const savedCart = window.localStorage.getItem('cart');
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const savedCart = window.localStorage.getItem("bene-cart");
     if (savedCart) {
-      setCart(JSON.parse(savedCart));
+      return JSON.parse(savedCart);
     }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    return [];
+  });
+  const [eventDetails, setEventDetails] = useState<EventDetails>(() => {
+    const savedEventDetails = window.localStorage.getItem("bene-event");
+    if (savedEventDetails) {
+      return JSON.parse(savedEventDetails);
+    }
+    return { type: "delivery" };
+  });
 
   const updateSheetSide = () => {
     if (width >= 768) {
@@ -74,6 +85,14 @@ export function Landing() {
       setSheetSide("bottom");
     }
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("bene-cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    window.localStorage.setItem("bene-event", JSON.stringify(eventDetails));
+  }, [eventDetails]);
 
   useEffect(() => {
     updateSheetSide();
@@ -100,11 +119,13 @@ export function Landing() {
         isMobile={isMobile}
         side={sheetSide}
         sheetWidth={sheetWidth}
+        eventDetails={eventDetails}
+        setEventDetails={setEventDetails}
       />
       <Banner />
       <div className="w-3/4 py-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
         {products.map((product, index) => (
-          <ProductCard 
+          <ProductCard
             key={index}
             alt="Product Image"
             src={product.image}
@@ -118,7 +139,12 @@ export function Landing() {
         ))}
       </div>
       <Footer />
-      <CartSheet sheetSide={sheetSide} sheetWidth={sheetWidth} cart={cart} setCart={setCart} />
+      <CartSheet
+        sheetSide={sheetSide}
+        sheetWidth={sheetWidth}
+        cart={cart}
+        setCart={setCart}
+      />
     </section>
   );
 }

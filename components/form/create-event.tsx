@@ -32,6 +32,7 @@ import { SheetSide } from "../landing";
 import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Dictionary } from "../landing";
+import { EventDetails } from "../landing";
 
 interface Delivery {
   address: string;
@@ -51,6 +52,8 @@ export function CreateEventForm({
   isMobile,
   side,
   sheetWidth,
+  eventDetails,
+  setEventDetails
 }: {
   dictionary: Dictionary;
   isOpen: boolean;
@@ -58,12 +61,9 @@ export function CreateEventForm({
   isMobile: boolean;
   side: SheetSide;
   sheetWidth: string;
+  eventDetails: EventDetails;
+  setEventDetails: React.Dispatch<React.SetStateAction<EventDetails>>;
 }) {
-  const [deliveryMethod, setDeliveryMethod] = useState("");
-  const [deliveryDate, setDeliveryDate] = useState("");
-  const [deliveryTime, setDeliveryTime] = useState("");
-  const [pickupDate, setPickupDate] = useState("");
-  const [pickupTime, setPickupTime] = useState("");
   const { toast } = useToast();
   const DialogOrSheet = isMobile ? Sheet : Dialog;
   const DialogOrSheetContent = isMobile
@@ -82,11 +82,17 @@ export function CreateEventForm({
     : DialogDescription;
   const DialogOrSheetFooter = isMobile ? SheetFooter : DialogFooter;
 
+  const handleSetDeliveryMethod = (method: string) => {
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      type: method as "delivery" | "pickup"
+    }));
+  };
+
   return (
     <DialogOrSheet
       open={isOpen}
       onOpenChange={(open: boolean) => {
-        console.log("onOpenChange");
         setIsOpen(false);
       }}
     >
@@ -94,19 +100,13 @@ export function CreateEventForm({
         <DialogOrSheetHeader>
           <DialogOrSheetTitle>Create Event</DialogOrSheetTitle>
           <DialogOrSheetDescription>
-            <span className="text-gray-600 dark:text-gray-400 text-sm tracking-wider leading-6">
-              Welcome! We&apos;re thrilled you&apos;ve chosen us. Let&apos;s
-              kick things off by setting up{" "}
-              <mark className="rounded border-dashed border-2 animate-pulse p-1 bg-green-200">
-                your event
-              </mark>
-            </span>
+            Welcome! We're thrilled you've chosen us. Let's kick things off by setting up your event.
           </DialogOrSheetDescription>
         </DialogOrSheetHeader>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="delivery-method">Delivery or Pickup</Label>
-            <Select onValueChange={setDeliveryMethod} value={deliveryMethod}>
+            <Select onValueChange={handleSetDeliveryMethod} value={eventDetails.type}>
               <SelectTrigger>
                 <SelectValue placeholder="Select a method" />
               </SelectTrigger>
@@ -118,7 +118,7 @@ export function CreateEventForm({
               </SelectContent>
             </Select>
           </div>
-          {deliveryMethod === "delivery" && (
+          {eventDetails.type === "delivery" && (
             <>
               <div className="space-y-2">
                 <Alert className="bg-green-200 dark:bg-gray-600">
@@ -134,8 +134,11 @@ export function CreateEventForm({
                   id="delivery-date"
                   placeholder="Enter delivery date"
                   type="date"
-                  value={deliveryDate}
-                  onChange={(e) => setDeliveryDate(e.target.value)}
+                  value={eventDetails.deliveryDate || ""}
+                  onChange={(e) => setEventDetails((prevDetails) => ({
+                    ...prevDetails,
+                    deliveryDate: e.target.value
+                  }))}
                 />
               </div>
               <div className="space-y-2">
@@ -144,13 +147,16 @@ export function CreateEventForm({
                   id="delivery-time"
                   placeholder="Enter delivery time"
                   type="time"
-                  value={deliveryTime}
-                  onChange={(e) => setDeliveryTime(e.target.value)}
+                  value={eventDetails.deliveryTime || ""}
+                  onChange={(e) => setEventDetails((prevDetails) => ({
+                    ...prevDetails,
+                    deliveryTime: e.target.value
+                  }))}
                 />
               </div>
             </>
           )}
-          {deliveryMethod === "pickup" && (
+          {eventDetails.type === "pickup" && (
             <>
               <div className="space-y-2">
                 <Alert className="bg-green-200 dark:bg-gray-600">
@@ -164,8 +170,11 @@ export function CreateEventForm({
                   id="pickup-date"
                   placeholder="Enter pickup date"
                   type="date"
-                  value={pickupDate}
-                  onChange={(e) => setPickupDate(e.target.value)}
+                  value={eventDetails.pickupDate || ""}
+                  onChange={(e) => setEventDetails((prevDetails) => ({
+                    ...prevDetails,
+                    pickupDate: e.target.value
+                  }))}
                 />
               </div>
               <div className="space-y-2">
@@ -174,8 +183,11 @@ export function CreateEventForm({
                   id="pickup-time"
                   placeholder="Enter pickup time"
                   type="time"
-                  value={pickupTime}
-                  onChange={(e) => setPickupTime(e.target.value)}
+                  value={eventDetails.pickupTime || ""}
+                  onChange={(e) => setEventDetails((prevDetails) => ({
+                    ...prevDetails,
+                    pickupTime: e.target.value
+                  }))}
                 />
               </div>
             </>
@@ -199,3 +211,4 @@ export function CreateEventForm({
     </DialogOrSheet>
   );
 }
+
