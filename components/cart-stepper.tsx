@@ -34,7 +34,59 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
     );
   };
 
-
+  const renderCartContent = () => (
+    <CardContent className="space-y-4 transition-all duration-500 ease-in-out">
+      {cart.map((item, index) => {
+        const product = products.find((p) => p.id === item.id);
+        return product ? (
+          <div
+            key={index}
+            className="border p-4 rounded-md transition-all duration-500 ease-in-out"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Image
+                  alt={product.name}
+                  height={50}
+                  src={product.image}
+                  objectFit="cover"
+                  width={50}
+                />
+                <div className="font-semibold">{product.name}</div>
+              </div>
+              <div>${product.price}</div>
+            </div>
+            <div className="flex items-center justify-between mt-2">
+              <div className="text-sm text-gray-500">Quantity:</div>
+              <div className="flex items-center space-x-2">
+                <Button
+                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  className="transition-all duration-500 ease-in-out"
+                  variant="outline"
+                >
+                  -
+                </Button>
+                <div>{item.quantity}</div>
+                <Button
+                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  className="transition-all duration-500 ease-in-out"
+                  variant="outline"
+                >
+                  +
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : null;
+      })}
+                <Button
+            onClick={nextStep}
+            className="w-full mt-4 transition-all duration-500 ease-in-out"
+          >
+            Proceed to Confirmation
+          </Button>
+    </CardContent>
+  );
 
   return (
     <div className="w-full max-w-3xl transition-all duration-500 ease-in-out">
@@ -62,67 +114,17 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
         </Button>
       )}
       {step === 0 && (
-        <Card className="transition-all duration-500 ease-in-out">
+        <Card className="transition-all duration-500 ease-in-out flex flex-col">
           <CardHeader>
             <CardTitle>Your Cart</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 transition-all duration-500 ease-in-out">
-            {cart.map((item, index) => {
-              const product = products.find((p) => p.id === item.id);
-              return product ? (
-                <ScrollArea className="rounded-md border">
-                  <div
-                    key={index} 
-                    className="border p-4 rounded-md transition-all duration-500 ease-in-out"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Image
-                          alt={product.name}
-                          height={50}
-                          src={product.image}
-                          objectFit="cover"
-                          width={50}
-                        />
-                        <div className="font-semibold">{product.name}</div>
-                      </div>
-                      <div>${product.price}</div>
-                    </div>
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="text-sm text-gray-500">Quantity:</div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          className="transition-all duration-500 ease-in-out"
-                          variant="outline"
-                        >
-                          -
-                        </Button>
-                        <div>{item.quantity}</div>
-                        <Button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                          className="transition-all duration-500 ease-in-out"
-                          variant="outline"
-                        >
-                          +
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </ScrollArea>
-              ) : null;
-            })}
-            <Button
-              onClick={nextStep}
-              className="w-full mt-4 transition-all duration-500 ease-in-out"
-            >
-              Proceed to Confirmation
-            </Button>
-          </CardContent>
+          {cart.length > 3 ? (
+            <ScrollArea className="max-h-96 overflow-y-auto flex-grow">
+              {renderCartContent()}
+            </ScrollArea>
+          ) : (
+            renderCartContent()
+          )}
         </Card>
       )}
       {step === 1 && (
