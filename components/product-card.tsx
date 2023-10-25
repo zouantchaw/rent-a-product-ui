@@ -41,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-start bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
+    <div className="flex flex-col items-start bg-gray-300 dark:bg-gray-600 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-200">
       <div className="w-full h-64 relative">
         <Image
           alt={alt}
