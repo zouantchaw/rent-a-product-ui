@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { products, Product } from "../data";
 import { CartItem } from "@/components/landing";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import Image from "next/image";
 interface CartStepperProps {
   cart: CartItem[];
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
@@ -33,6 +33,8 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
         .filter((item) => item.quantity > 0)
     );
   };
+
+
 
   return (
     <div className="w-full max-w-3xl transition-all duration-500 ease-in-out">
@@ -70,20 +72,17 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
               return product ? (
                 <ScrollArea className="rounded-md border">
                   <div
-                    key={index}
+                    key={index} 
                     className="border p-4 rounded-md transition-all duration-500 ease-in-out"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <img
+                        <Image
                           alt={product.name}
-                          height="50"
+                          height={50}
                           src={product.image}
-                          style={{
-                            aspectRatio: "50/50",
-                            objectFit: "cover",
-                          }}
-                          width="50"
+                          objectFit="cover"
+                          width={50}
                         />
                         <div className="font-semibold">{product.name}</div>
                       </div>

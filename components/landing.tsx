@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from "react";
 import {} from "@/components/ui/popover";
 import { Header } from "@/components/header";
@@ -40,7 +40,7 @@ export function Landing() {
   const [locale, setLocale] = useState<string>("en");
   const [dictionary, setDictionary] = useState<Dictionary>({
     greeting: "",
-    products: {
+    products: { 
       cart: "",
       checkout: "",
     },

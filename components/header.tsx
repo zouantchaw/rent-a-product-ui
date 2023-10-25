@@ -12,6 +12,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ locale, setLocale }) => {
 
+  console.log("hey")
   useEffect(() => {
     const fetchDict = async () => {
       const result = await getDictionary("en"); // en
