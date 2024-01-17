@@ -60,13 +60,7 @@ export function Landing() {
     },
   });
   const [width] = useWindowSize();
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    const savedCart = window?.localStorage.getItem("bene-cart");
-    if (savedCart) {
-      return JSON.parse(savedCart);
-    }
-    return [];
-  });
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [eventDetails, setEventDetails] = useState<EventDetails>(() => {
     const savedEventDetails = window.localStorage.getItem("bene-event");
     if (savedEventDetails) {
@@ -85,6 +79,13 @@ export function Landing() {
       setSheetSide("bottom");
     }
   };
+
+  useEffect(() => {
+    const savedCart = window?.localStorage.getItem("bene-cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
 
   useEffect(() => {
     window?.localStorage.setItem("bene-cart", JSON.stringify(cart));
