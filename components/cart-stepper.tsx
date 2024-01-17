@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { products } from "../data";
 import { CartItem } from "@/components/landing";
 import Image from "next/image";
+import { useToast } from "./ui/use-toast";
 interface CartStepperProps {
   cart: CartItem[];
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
 }
 
 export function CartStepper({ cart, setCart }: CartStepperProps) {
+  const {toast} = useToast();
   const [step, setStep] = useState(0);
   const [eventDetails, setEventDetails] = useState({
     location: '',
@@ -20,18 +22,40 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
     email: '',
     phone: '',
   });
+  const [error, setError] = useState('');
 
   const nextStep = () => {
+    if (step === 0 && cart.length === 0) {
+      setError('Your cart is empty.');
+      return;
+    }
+    if (step === 1 && !validateEventDetails()) {
+      setError('Please fill in all event details.');
+      return;
+    }
+    setError('');
     setStep(step + 1);
   };
 
   const prevStep = () => {
+    setError('');
     if (step > 0) {
       setStep(step - 1);
     }
   };
 
+  const validateEventDetails = () => {
+    return Object.values(eventDetails).every((detail) => detail.trim() !== '');
+  };
+
   const updateQuantity = (id: string, quantity: number) => {
+    if (quantity < 0) {
+      toast({
+        title: "Error",
+        description: "Quantity cannot be negative.",
+      });
+      return;
+    }
     setCart(
       cart
         .map((item) => (item.id === id ? { ...item, quantity } : item))
@@ -94,6 +118,7 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
 
   return (
     <div className="w-full max-w-3xl transition-all duration-500 ease-in-out">
+      {error && <div className="text-red-500">{error}</div>}
       {step !== 0 && (
         <Button
           onClick={prevStep}
@@ -176,6 +201,19 @@ export function CartStepper({ cart, setCart }: CartStepperProps) {
           </CardHeader>
           <CardContent className="space-y-4 transition-all duration-500 ease-in-out">
             <p>Your order has been sent. Please check your email for confirmation and further instructions.</p>
+            <Button
+              onClick={() => {
+                toast({
+                  title: "Order Confirmed",
+                  description: "Thank you for your order. We will be in touch soon!",
+                });
+                setCart([]);
+                setStep(0);
+              }}
+              className="w-full mt-4 transition-all duration-500 ease-in-out"
+            >
+              Finish
+            </Button>
           </CardContent>
         </Card>
       )}
