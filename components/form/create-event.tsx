@@ -100,7 +100,7 @@ export function CreateEventForm({
         <DialogOrSheetHeader>
           <DialogOrSheetTitle>Create Event</DialogOrSheetTitle>
           <DialogOrSheetDescription>
-            Welcome! We're thrilled you've chosen us. Let's kick things off by setting up your event.
+            Welcome! We&lsquo;re thrilled you&lsquo;ve chosen us. Let&lsquo;s kick things off by setting up your event.
           </DialogOrSheetDescription>
         </DialogOrSheetHeader>
         <div className="space-y-4">
