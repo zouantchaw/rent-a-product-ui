@@ -61,13 +61,7 @@ export function Landing() {
   });
   const [width] = useWindowSize();
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [eventDetails, setEventDetails] = useState<EventDetails>(() => {
-    const savedEventDetails = window.localStorage.getItem("bene-event");
-    if (savedEventDetails) {
-      return JSON.parse(savedEventDetails);
-    }
-    return { type: "delivery" };
-  });
+  const [eventDetails, setEventDetails] = useState<EventDetails>({ type: "delivery" });
 
   const updateSheetSide = () => {
     if (width >= 768) {
@@ -84,6 +78,13 @@ export function Landing() {
     const savedCart = window?.localStorage.getItem("bene-cart");
     if (savedCart) {
       setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    const savedEventDetails = window.localStorage.getItem("bene-event");
+    if (savedEventDetails) {
+      setEventDetails(JSON.parse(savedEventDetails));
     }
   }, []);
 
