@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
-const image = "/klutch-logo.png";
+const image = "/frederickpartyrentalslogo.png";
 
 export const metadata: Metadata = {
   title: "Frederick Party Rentals",

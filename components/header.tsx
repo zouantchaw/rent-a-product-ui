@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, setLocale }) => {
           alt="Company Logo"
           className="object-contain object-center rounded-full"
           height={80} 
-          src="/klutch-logo.png"
+          src="/frederickpartyrentalslogo.png"
           layout="fixed"
           width={80}
         />
@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, setLocale }) => {
         </h2>
       </div>
       <div className="flex space-x-4">
-        <LangSelector />
+        {/* <LangSelector /> */}
         <ModeToggle />
       </div>
     </div>
