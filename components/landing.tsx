@@ -61,7 +61,7 @@ export function Landing() {
   });
   const [width] = useWindowSize();
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const savedCart = window.localStorage.getItem("bene-cart");
+    const savedCart = window?.localStorage.getItem("bene-cart");
     if (savedCart) {
       return JSON.parse(savedCart);
     }
@@ -87,16 +87,16 @@ export function Landing() {
   };
 
   useEffect(() => {
-    window.localStorage.setItem("bene-cart", JSON.stringify(cart));
+    window?.localStorage.setItem("bene-cart", JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
-    window.localStorage.setItem("bene-event", JSON.stringify(eventDetails));
+    window?.localStorage.setItem("bene-event", JSON.stringify(eventDetails));
   }, [eventDetails]);
 
   useEffect(() => {
     updateSheetSide();
-    setIsOpen(true);
+    // setIsOpen(true);
   }, [width]);
 
   useEffect(() => {
